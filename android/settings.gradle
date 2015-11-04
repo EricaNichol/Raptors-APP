@@ -1,0 +1,3 @@
+rootProject.name = 'rapsapp'
+
+include ':app'
