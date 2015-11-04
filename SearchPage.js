@@ -14,6 +14,12 @@ var {
 } = React;
 
 var styles = StyleSheet.create({
+  welcome: {
+    fontSize: 20,
+    marginBottom: 10,
+    textAlign: 'center',
+    color: 'grey',
+  },
   description: {
     marginBottom: 20,
     fontSize: 18,
@@ -72,6 +78,7 @@ function urlForQueryAndPage(querystring) {
 
 };
 
+var SearchResults = require('./SearchResults');
 
 class SearchPage extends Component{
   constructor(props) {
@@ -92,7 +99,7 @@ class SearchPage extends Component{
   .catch(error =>
      this.setState({
       isLoading: false,
-      message: 'Something bad happened ' + error
+      message: 'No Results'
    }));
  }
 
@@ -100,7 +107,11 @@ class SearchPage extends Component{
       console.dir(response);
       this.setState({ isLoading: false , message: '' });
       if (response.length > 1) {
-        console.log('Players found ' + response.length);
+        this.props.navigator.push({
+          title: 'Results',
+          component: SearchResults,
+          passProps: { players: response }
+        })
       } else {
         this.setState({ message: 'Location not recognized; please try again.'});
       }
@@ -122,11 +133,22 @@ class SearchPage extends Component{
 
     return (
       <View style = { styles.container }>
-        <Text style = { styles.description }>
-          Search for a player
+
+        <Text style = { styles.welcome }>
+          Welcome to my first IOS App.
         </Text>
         <Text style = { styles.description }>
-          Search by position or name
+          Nov 2: got search and listview working,
+          will be adding a view and improve
+          the search function
+        </Text>
+        <Text style = { styles.description }>
+          Search by: positions
+        </Text>
+        <Text style = { styles.description }>
+          must use dash as spaces, for example
+          Power Forwards = power-forwards
+          Point Guards   = point-guards
         </Text>
 
         <View style={styles.flowRight}>

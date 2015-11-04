@@ -20,16 +20,6 @@ let {
 var SearchPage = require('./SearchPage');
 
 
-class HelloWorld extends React.Component {
-  render() {
-    return (
-        <Text style = { styles.text }>
-          Hello World
-        </Text>
-   );
-  }
- }
-
 class RaptorsApp extends React.Component{
   render() {
     return(
