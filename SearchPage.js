@@ -104,7 +104,6 @@ class SearchPage extends Component{
  }
 
   _handleResponse(response) {
-      console.dir(response);
       this.setState({ isLoading: false , message: '' });
       if (response.length > 1) {
         this.props.navigator.push({

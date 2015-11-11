@@ -11,6 +11,21 @@ var {
   Component
 } = React;
 
+var styles = StyleSheet.create({
+  playerName: {
+  fontSize: 25,
+  fontWeight: 'bold',
+  color: '#48BBEC',
+  marginLeft: 20
+  },
+  separator: {
+    height: 1,
+    backgroundColor: 'black'
+  }
+});
+
+var PlayerView = require('./PlayerView');
+
 class SearchResults extends Component {
 
   constructor(props) {
@@ -22,13 +37,24 @@ class SearchResults extends Component {
     };
   }
 
+  rowPress(data) {
+    this.props.navigator.push({
+      title: "Player",
+      component: PlayerView,
+      passProps: { player: data }
+    });
+  }
+
   renderRow(dataSource) {
     return (
       <TouchableHighlight
+          onPress = { this.rowPress.bind(this, dataSource) }
           underlayColor='#dddddd'>
         <View>
-          <Text>{ dataSource.player }</Text>
+          <Text style = { styles.playerName }> { dataSource.player } </Text>
+          <View style = { styles.separator } />
         </View>
+
       </TouchableHighlight>
     );
   }
@@ -37,7 +63,8 @@ class SearchResults extends Component {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderRow.bind(this)}/>
+        renderRow={this.renderRow.bind(this) }
+         />
     );
   }
 
